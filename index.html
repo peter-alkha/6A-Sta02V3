@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 6A - Website Resmi</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            padding-bottom: 90px;
+            background: linear-gradient(180deg, #020024 0%, #090979 35%, #00d4ff 100%);
+            background-attachment: fixed;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- ANIMASI LAUT --- */
+        .ocean-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .seaweed {
+            position: absolute;
+            bottom: 0;
+            width: 12px;
+            background: linear-gradient(to top, #0f5132, #25cff2);
+            border-radius: 50px 50px 0 0;
+            opacity: 0.7;
+            animation: wave 3s infinite ease-in-out alternate;
+            transform-origin: bottom center;
+        }
+        .sw1 { height: 120px; left: 5%; animation-duration: 2.5s; }
+        .sw2 { height: 180px; left: 8%; animation-duration: 3.2s; }
+        .sw3 { height: 150px; right: 6%; animation-duration: 2.8s; }
+        .sw4 { height: 200px; right: 10%; animation-duration: 3.5s; }
+
+        @keyframes wave {
+            0% { transform: rotate(-8deg); }
+            100% { transform: rotate(8deg); }
+        }
+
+        .fish {
+            position: absolute;
+            font-size: 2rem;
+            animation: swim linear infinite;
+        }
+        .fish1 { top: 20%; left: -10%; animation-duration: 12s; }
+        .fish2 { top: 50%; left: -10%; animation-duration: 18s; animation-delay: 3s; font-size: 1.5rem; }
+        .fish3 { top: 75%; left: -10%; animation-duration: 15s; animation-delay: 7s; font-size: 2.5rem; }
+
+        @keyframes swim {
+            0% { left: -10%; transform: scaleX(1); }
+            50% { transform: scaleX(1); }
+            51% { transform: scaleX(-1); }
+            100% { left: 110%; transform: scaleX(-1); }
+        }
+
+        header, nav, .container, footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            background: rgba(2, 0, 36, 0.75);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem 1.5rem 1rem;
+            box-shadow: 0 4px 15px rgba(0,212,255,0.3);
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #00d4ff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+        }
+
+        .corner-badge {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-weight: bold; font-size: 1.5rem;
+            color: #f1c40f;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            padding: 5px 15px; border-radius: 12px;
+            border: 1px solid #f1c40f;
+            box-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+        }
+
+        .tiktok-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .tiktok-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #fe2c55, #25f4ee);
+            color: black; text-decoration: none;
+            padding: 8px 16px; border-radius: 25px;
+            font-weight: bold; font-size: 0.85rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+        .tiktok-btn:hover { transform: scale(1.05); }
+
+        .creator-text {
+            display: block;
+            font-size: 0.75rem;
+            color: #e0e0e0;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        nav {
+            background: rgba(9, 9, 121, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem; text-align: center;
+            position: sticky; top: 0; z-index: 100;
+        }
+
+        .nav-btn {
+            background: transparent; border: none;
+            color: white; font-size: 0.95rem; font-weight: bold;
+            padding: 8px 14px; margin: 2px;
+            cursor: pointer; border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: #00d4ff;
+            color: #020024;
+            box-shadow: 0 0 10px #00d4ff;
+        }
+
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section {
+            background: white; color: #333;
+            border-radius: 15px; overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        .hero-image { width: 100%; height: 280px; object-fit: cover; }
+        .hero-info { display: flex; justify-content: space-around; padding: 20px; flex-wrap: wrap; gap: 10px; }
+        .info-card { text-align: center; padding: 10px; flex: 1; min-width: 150px; background: #f0f8ff; border-radius: 10px; }
+        .info-card h3 { font-size: 0.8rem; color: #555; }
+        .info-card p { font-size: 1.2rem; font-weight: bold; color: #090979; }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .timer-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #00d4ff;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+        }
+
+        .timer-card h3 { font-size: 1rem; color: #f1c40f; margin-bottom: 5px; }
+        .timer-card .time-val { font-size: 1.6rem; font-weight: bold; color: #ffffff; font-family: 'Courier New', Courier, monospace; }
+        .timer-card .sub-val { font-size: 0.85rem; color: #00d4ff; margin-top: 5px; }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-content h2 { color: #00d4ff; margin-bottom: 20px; border-bottom: 2px solid #00d4ff; padding-bottom: 5px; display: inline-block; }
+
+        .teacher-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .teacher-card { background: rgba(255, 255, 255, 0.9); color: #333; border-radius: 12px; overflow: hidden; text-align: center; transition: transform 0.3s; }
+        .teacher-card:hover { transform: translateY(-5px); }
+        .teacher-card img { width: 100%; height: 220px; object-fit: cover; }
+        .teacher-card-body { padding: 15px; }
+
+        .announcement-item { background: rgba(255, 255, 255, 0.9); color: #333; border-left: 5px solid #00d4ff; padding: 15px; margin-bottom: 15px; border-radius: 8px; }
+
+        .table-responsive { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: rgba(255,255,255,0.9); color: #333; border-radius: 8px; overflow: hidden; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+        th { background: #090979; color: white; }
+
+        .piket-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; }
+        .piket-box { background: rgba(255,255,255,0.9); color: #333; padding: 15px; border-radius: 10px; }
+        .piket-box h3 { background: #090979; color: white; text-align: center; padding: 5px; border-radius: 5px; margin-bottom: 10px; }
+        .piket-box ol { padding-left: 20px; }
+
+        .materi-box { background: rgba(0, 0, 0, 0.35); border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #00d4ff; }
+        .materi-box h3 { color: #f1c40f; margin-bottom: 10px; font-size: 1.2rem; }
+        .materi-box p, .materi-box ul { font-size: 0.95rem; color: #e2e8f0; margin-bottom: 10px; }
+        .materi-box ul { padding-left: 20px; }
+
+        .learn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 15px; }
+        .learn-card { background: rgba(0, 0, 0, 0.4); border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 15px; padding: 15px; text-align: center; transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
+        .learn-card:hover { transform: translateY(-5px); border-color: #00d4ff; box-shadow: 0 0 15px rgba(0, 212, 255, 0.4); }
+        .learn-icon { font-size: 2rem; margin-bottom: 8px; }
+        .learn-title { font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 5px; }
+        .learn-desc { font-size: 0.8rem; color: #d1d5db; margin-bottom: 12px; }
+        .learn-btn { display: inline-block; width: 100%; padding: 8px; border-radius: 20px; text-decoration: none; font-weight: bold; color: #ffffff; font-size: 0.85rem; }
+
+        .bg-chatgpt { background: linear-gradient(135deg, #10a37f, #007a5e); }
+        .bg-meta { background: linear-gradient(135deg, #0666e5, #004299); }
+        .bg-gemini { background: linear-gradient(135deg, #8e24aa, #4a148c); }
+        .bg-google { background: linear-gradient(135deg, #4285f4, #ea4335); }
+        .bg-youtube { background: linear-gradient(135deg, #ff0000, #b30000); }
+
+        /* --- STYLES OPSI PENGEMBANG MURID --- */
+        .dev-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #00d4ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .dev-box h3 {
+            color: #f1c40f;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Virtual Pet Styles */
+        .pet-stage-display {
+            font-size: 4rem;
+            text-align: center;
+            margin: 15px 0;
+            user-select: none;
+            transition: transform 0.3s;
+        }
+        .pet-stage-display:hover { transform: scale(1.1); }
+        .pet-status-bar {
+            margin-bottom: 10px;
+        }
+        .pet-status-label {
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .pet-progress-bg {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            height: 12px;
+            overflow: hidden;
+        }
+        .pet-progress-fill {
+            height: 100%;
+            background: #00d4ff;
+            width: 50%;
+            transition: width 0.3s ease;
+        }
+        .pet-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        /* Canvas Gambar */
+        #drawCanvas {
+            background: #ffffff;
+            border-radius: 8px;
+            cursor: crosshair;
+            touch-action: none;
+            width: 100%;
+            height: 300px;
+            display: block;
+        }
+        .draw-tools {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        /* Buku Catatan Teks */
+        .note-area {
+            width: 100%;
+            height: 150px;
+            background: #1e293b;
+            color: #ffffff;
+            border: 1px solid #00d4ff;
+            border-radius: 8px;
+            padding: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            resize: vertical;
+        }
+
+        /* Kalkulator Bebas */
+        .calc-display {
+            width: 100%;
+            height: 50px;
+            background: #0f172a;
+            color: #00d4ff;
+            border: 1px solid #00d4ff;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            text-align: right;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-family: monospace;
+            outline: none;
+        }
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        .calc-btn {
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .calc-btn:hover { background: #00d4ff; color: #020024; }
+
+        /* Code Editor */
+        .code-input {
+            width: 100%;
+            height: 120px;
+            background: #0d1117;
+            color: #7ee787;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            outline: none;
+            resize: vertical;
+        }
+        #codePreview {
+            width: 100%;
+            height: 150px;
+            background: #ffffff;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: none;
+        }
+
+        /* --- STYLES GAMES --- */
+        .game-section-title { color: #f1c40f; margin-top: 15px; margin-bottom: 10px; font-size: 1.3rem; }
+        .math-game-box { background: rgba(0, 0, 0, 0.5); border: 2px solid #2ecc71; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 25px; }
+        .math-question { font-size: 2.2rem; font-weight: bold; color: #f1c40f; margin: 15px 0; }
+        .math-input { width: 140px; padding: 10px; font-size: 1.2rem; text-align: center; border-radius: 8px; border: 2px solid #00d4ff; outline: none; margin-right: 10px; }
+        .adventure-container { background: rgba(0, 0, 0, 0.5); border: 2px solid #00d4ff; border-radius: 12px; padding: 15px; text-align: center; margin-bottom: 25px; }
+        .flappy-container { text-align: center; background: rgba(0, 0, 0, 0.5); border: 2px solid #e74c3c; border-radius: 12px; padding: 15px; margin-bottom: 25px; }
+        #flappyCanvas { background: #111827; border: 2px solid #00d4ff; border-radius: 8px; display: block; margin: 10px auto; max-width: 100%; touch-action: manipulation; }
+        .grid-board { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(5, 1fr); gap: 5px; width: 280px; height: 280px; margin: 15px auto; background: #111827; padding: 5px; border-radius: 10px; border: 2px solid #3b82f6; }
+        .grid-cell { background: rgba(255, 255, 255, 0.05); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; user-select: none; }
+        .controls-grid { display: grid; grid-template-columns: repeat(3, 50px); gap: 5px; justify-content: center; margin-top: 10px; }
+        .ctrl-btn { width: 50px; height: 50px; background: #00d4ff; color: #020024; border: none; border-radius: 10px; font-size: 1.2rem; font-weight: bold; cursor: pointer; }
+        .ttt-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 300px; margin: 15px auto; }
+        .ttt-cell { width: 80px; height: 80px; background: rgba(255, 255, 255, 0.9); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #090979; cursor: pointer; }
+        .game-status { text-align: center; font-weight: bold; font-size: 1.1rem; margin: 10px 0; color: #00d4ff; }
+        .game-btn { display: inline-block; margin: 10px 5px; background: #00d4ff; color: #020024; border: none; padding: 8px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+        .dice-box { text-align: center; padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 12px; margin-top: 20px; }
+        .dice-display { font-size: 4rem; margin: 10px 0; }
+
+        footer { text-align: center; padding: 12px; background: rgba(2, 0, 36, 0.95); color: white; position: fixed; bottom: 0; width: 100%; border-top: 1px solid #00d4ff; font-size: 0.85rem; }
+        footer a { color: #00d4ff; text-decoration: none; font-weight: bold; }
+        .footer-subtext { font-size: 0.72rem; color: #a0a0a0; margin-top: 3px; }
+    </style>
+</head>
+<body>
+
+    <!-- Animasi Laut -->
+    <div class="ocean-bg">
+        <div class="fish fish1">🐠</div>
+        <div class="fish fish2">🐟</div>
+        <div class="fish fish3">🦈</div>
+        <div class="seaweed sw1"></div>
+        <div class="seaweed sw2"></div>
+        <div class="seaweed sw3"></div>
+        <div class="seaweed sw4"></div>
+    </div>
+
+    <header>
+        <div class="corner-badge">6A</div>
+        <h1>Class 6A</h1>
+        <p>Website Resmi & Pusat Informasi Kelas VI A</p>
+        
+        <div class="tiktok-container">
+            <a href="https://www.tiktok.com/@classenama26?_r=1&_t=ZS-99CnAujt7WW" target="_blank" class="tiktok-btn">
+                🎵 TikTok Kelas: @classenama26
+            </a>
+            <a href="https://www.tiktok.com/@alkha8149" target="_blank" class="tiktok-btn" style="background: linear-gradient(45deg, #00d4ff, #25f4ee);">
+                👤 Pembuat Web: @alkha8149
+            </a>
+        </div>
+        <span class="creator-text">✨ Bantu follow TikTok pembuat website ini: <strong>@alkha8149</strong></span>
+    </header>
+
+    <nav>
+        <button class="nav-btn active" onclick="openTab('beranda', this)">Beranda</button>
+        <button class="nav-btn" onclick="openTab('profil-guru', this)">Profil Guru</button>
+        <button class="nav-btn" onclick="openTab('jadwal-pelajaran', this)">Jadwal Pelajaran</button>
+        <button class="nav-btn" onclick="openTab('jadwal-piket', this)">Jadwal Piket</button>
+        <button class="nav-btn" onclick="openTab('pengumuman', this)">Pengumuman</button>
+        <button class="nav-btn" onclick="openTab('belajar-lebih-lanjut', this)">📚 Belajar</button>
+        <button class="nav-btn" onclick="openTab('opsi-pengembang', this)">🛠️ Opsi Pengembang</button>
+        <button class="nav-btn" onclick="openTab('mini-game', this)">🎮 Mini Game</button>
+    </nav>
+
+    <div class="container">
+
+        <!-- BERANDA -->
+        <div id="beranda" class="tab-content active">
+            <div class="hero-section">
+                <img class="hero-image" src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1000&q=80" alt="Ruang Kelas 6A">
+                <div class="hero-info">
+                    <div class="info-card"><h3>Kelas</h3><p>6A</p></div>
+                    <div class="info-card"><h3>Jumlah Murid</h3><p>26 Murid</p></div>
+                    <div class="info-card"><h3>Wali Kelas</h3><p>Pak Tohani</p></div>
+                </div>
+            </div>
+
+            <div class="timer-grid">
+                <div class="timer-card">
+                    <h3>🕒 Waktu Sekarang</h3>
+                    <div class="time-val" id="current-time">00:00:00</div>
+                    <div class="sub-val">Waktu Real-Time</div>
+                </div>
+                <div class="timer-card">
+                    <h3>🔔 Hitung Mundur Masuk (06.30)</h3>
+                    <div class="time-val" id="countdown-masuk">00s:00m:00d</div>
+                    <div class="sub-val">Menuju Waktu Masuk</div>
+                </div>
+                <div class="timer-card">
+                    <h3>🏠 Hitung Mundur Pulang (12.00)</h3>
+                    <div class="time-val" id="countdown-pulang">00s:00m:00d</div>
+                    <div class="sub-val" id="status-pulang">Menuju Waktu Pulang</div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <h2>Jadwal Hari Ini</h2>
+                <p><strong>Hari/Tanggal:</strong> <span id="today-date"></span></p><br>
+                <p><strong>Pelajaran Hari Ini:</strong></p>
+                <p id="today-lesson" style="color: #00d4ff; font-weight: bold; font-size: 1.1rem;"></p><br>
+                <p><strong>Petugas Piket Hari Ini:</strong></p>
+                <p id="today-piket" style="color: #2ecc71; font-weight: bold; font-size: 1.1rem;"></p>
+            </div>
+        </div>
+
+        <!-- PROFIL GURU -->
+        <div id="profil-guru" class="tab-content">
+            <div class="glass-card">
+                <h2>Profil Guru Kelas 6A</h2>
+                <div class="teacher-grid">
+                    <div class="teacher-card">
+                        <img src="Screenshot_20260826-195252.jpg" alt="Pak Tohani">
+                        <div class="teacher-card-body"><h3>Pak Tohani</h3><p>Wali Kelas 6A</p></div>
+                    </div>
+                    <div class="teacher-card">
+                        <img src="Screenshot_20260826-195325.jpg" alt="Miss Suci">
+                        <div class="teacher-card-body"><h3>Miss Suci</h3><p>Guru Pengajar</p></div>
+                    </div>
+                    <div class="teacher-card">
+                        <img src="Screenshot_20260826-195336.jpg" alt="Pak Fikri">
+                        <div class="teacher-card-body"><h3>Pak Fikri</h3><p>Guru Penjas</p></div>
+                    </div>
+                    <div class="teacher-card">
+                        <img src="Screenshot_20260826-195350.jpg" alt="Pak Pasuhandan">
+                        <div class="teacher-card-body"><h3>Pak Pasuhandan</h3><p>Guru Agama</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JADWAL PELAJARAN -->
+        <div id="jadwal-pelajaran" class="tab-content">
+            <div class="glass-card">
+                <h2>Jadwal Pelajaran Lengkap</h2>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Waktu</th><th>Senin</th><th>Selasa</th><th>Rabu</th><th>Kamis</th><th>Jum'at</th><th>Sabtu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>07.15 - 07.50</strong></td><td>Upacara</td><td>Penjas</td><td>SBdP</td><td>Matematika</td><td>Matematika</td><td>TKA/Pramuka</td></tr>
+                            <tr><td><strong>07.50 - 08.25</strong></td><td>PP</td><td>Penjas</td><td>SBdP</td><td>Matematika</td><td>Matematika</td><td>TKA/Pramuka</td></tr>
+                            <tr><td><strong>08.25 - 09.00</strong></td><td>PP</td><td>Penjas</td><td>SBdP</td><td>B. Sunda</td><td>Matematika</td><td>Ekskul Pilihan</td></tr>
+                            <tr><td><strong>09.00 - 09.35</strong></td><td>PP</td><td>Penjas</td><td>IPAS</td><td>B. Sunda</td><td>IPAS</td><td>Ekskul Pilihan</td></tr>
+                            <tr><td><strong>09.35 - 10.15</strong></td><td colspan="5">Istirahat</td><td>Ekskul Pilihan</td></tr>
+                            <tr><td><strong>10.15 - 10.50</strong></td><td>Agama</td><td>B. Indonesia</td><td>B. Indonesia</td><td>IPAS</td><td>IPAS</td><td>- Libur -</td></tr>
+                            <tr><td><strong>10.50 - 11.25</strong></td><td>Agama</td><td>B. Indonesia</td><td>B. Indonesia</td><td>B. Ing</td><td>- Libur -</td><td>- Libur -</td></tr>
+                            <tr><td><strong>11.25 - 12.00</strong></td><td>Agama</td><td>B. Indonesia</td><td>B. Indonesia</td><td>B. Ing</td><td>- Libur -</td><td>- Libur -</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- JADWAL PIKET -->
+        <div id="jadwal-piket" class="tab-content">
+            <div class="glass-card">
+                <h2>Jadwal Piket Kebersihan</h2>
+                <div class="piket-grid">
+                    <div class="piket-box"><h3>Senin</h3><ol><li>Raka</li><li>Denis</li><li>Abid</li><li>Theo</li><li>Ghani</li><li>Arjuna</li></ol></div>
+                    <div class="piket-box"><h3>Selasa</h3><ol><li>Avril</li><li>Bilqis</li><li>Astagina</li><li>Khansa</li><li>Amira</li></ol></div>
+                    <div class="piket-box"><h3>Rabu</h3><ol><li>Maudy</li><li>Lora</li><li>Ajwa</li><li>Qetrine</li><li>Sahrini</li></ol></div>
+                    <div class="piket-box"><h3>Kamis</h3><ol><li>Alby</li><li>Danis</li><li>Alkha</li><li>Edzra</li><li>Azka</li></ol></div>
+                    <div class="piket-box"><h3>Jumat</h3><ol><li>Adel</li><li>Khalila</li><li>Verald</li><li>Miftah</li><li>Marcel</li></ol></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PENGUMUMAN -->
+        <div id="pengumuman" class="tab-content">
+            <div class="glass-card">
+                <h2>Pengumuman Kelas</h2>
+                <div class="announcement-item">
+                    <h3>📢 Upacara Bendera Merah Putih</h3>
+                    <p>Wajib setiap Senin seluruh murid mengikuti Upacara Bendera Merah Putih dengan seragam lengkap.</p>
+                </div>
+                <div class="announcement-item">
+                    <h3>🏃‍♂️ Senam Kebersamaan</h3>
+                    <p>Diingatkan kepada seluruh siswa agar selalu semangat dan tidak malas saat ada kegiatan senam!</p>
+                </div>
+                <div class="announcement-item">
+                    <h3>📢 Tugas Tampil Bahasa Inggris</h3>
+                    <p><strong>Kamis, 27 Agustus:</strong> Terdapat tugas tampil Bahasa Inggris. Harap mempersiapkan diri!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BELAJAR LEBIH LANJUT -->
+        <div id="belajar-lebih-lanjut" class="tab-content">
+            <div class="glass-card">
+                <h2>📚 Belajar Lebih Lanjut (Materi Asik)</h2>
+                <p style="margin-bottom: 20px;">Yuk, belajar hal-hal seru dengan cara yang santai!</p>
+
+                <div class="materi-box">
+                    <h3>🌌 1. Rahasia Tata Surya</h3>
+                    <p>Matahari itu ibarat "bos utama" yang ada di tengah. Planet-planet muterin matahari karena gaya gravitasi.</p>
+                </div>
+
+                <div class="materi-box">
+                    <h3>🔢 2. Matematika Super Cepat</h3>
+                    <p>Perkalian, Pangkat 2, Pangkat 3, dan Akar Kuadrat bisa kamu pelajari dengan mudah!</p>
+                </div>
+
+                <div class="materi-box">
+                    <h3>🦴 3. Biologi Tubuh: Tulang vs Otot</h3>
+                    <p>Tulang sebagai penopang tubuh pasif & otot sebagai alat gerak aktif!</p>
+                </div>
+
+                <div class="materi-box">
+                    <h3>🗣️ 4. Pojok Bahasa Asing</h3>
+                    <p>Belajar bahasa Inggris, Jepang, dan Jerman untuk menambah wawasanmu.</p>
+                </div>
+
+                <h3 style="color: #00d4ff; margin-top: 25px; margin-bottom: 10px;">🔗 Pindah Langsung ke AI & Youtube Belajar</h3>
+                <div class="learn-grid">
+                    <div class="learn-card">
+                        <div class="learn-icon">🤖</div>
+                        <div class="learn-title">ChatGPT</div>
+                        <a href="https://chatgpt.com/" target="_blank" class="learn-btn bg-chatgpt">Buka ChatGPT 🚀</a>
+                    </div>
+                    <div class="learn-card">
+                        <div class="learn-icon">🌐</div>
+                        <div class="learn-title">Meta AI</div>
+                        <a href="https://www.meta.ai/" target="_blank" class="learn-btn bg-meta">Buka Meta AI 🚀</a>
+                    </div>
+                    <div class="learn-card">
+                        <div class="learn-icon">✨</div>
+                        <div class="learn-title">Gemini AI</div>
+                        <a href="https://gemini.google.com/" target="_blank" class="learn-btn bg-gemini">Buka Gemini AI 🚀</a>
+                    </div>
+                    <div class="learn-card">
+                        <div class="learn-icon">🔍</div>
+                        <div class="learn-title">Google Search</div>
+                        <a href="https://www.google.com/" target="_blank" class="learn-btn bg-google">Cari di Google 🚀</a>
+                    </div>
+                    <div class="learn-card">
+                        <div class="learn-icon">📺</div>
+                        <div class="learn-title">YouTube</div>
+                        <a href="https://www.youtube.com/" target="_blank" class="learn-btn bg-youtube">Nonton YouTube 🚀</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPSI PENGEMBANG BEBAS MURID -->
+        <div id="opsi-pengembang" class="tab-content">
+            <div class="glass-card">
+                <h2>🛠️ Opsi Pengembang Bebas Murid</h2>
+                <p style="margin-bottom: 20px;">Tempat kreasi bebas untuk murid Kelas 6A! Kamu bisa merawat hewan peliharaan virtual, menggambar, menulis catatan, menghitung, hingga mencoba membuat program web sendiri.</p>
+
+                <!-- FITUR BARU: HEWAN PELIHARAAN VIRTUAL -->
+                <div class="dev-box">
+                    <h3>🐣 1. Hewan Peliharaan Virtual (Rawat Setiap Hari)</h3>
+                    <div style="text-align: center;">
+                        <p id="petStageTitle" style="font-weight: bold; color: #f1c40f; font-size: 1.1rem;">Fase: Telur (Masa Pertumbuhan: 0/10)</p>
+                        <div class="pet-stage-display" id="petDisplay">🥚</div>
+                        <p id="petStatusMessage" style="color: #00d4ff; margin-bottom: 15px; font-weight: bold;">Peliharaanmu merasa sehat dan ceria!</p>
+                    </div>
+
+                    <!-- Bar Indikator Stats -->
+                    <div class="pet-status-bar">
+                        <div class="pet-status-label"><span>Kenyang (Makan)</span><span id="hungerVal">100%</span></div>
+                        <div class="pet-progress-bg"><div class="pet-progress-fill" id="hungerBar" style="width: 100%; background: #2ecc71;"></div></div>
+                    </div>
+
+                    <div class="pet-status-bar">
+                        <div class="pet-status-label"><span>Kesegaran (Minum)</span><span id="thirstVal">100%</span></div>
+                        <div class="pet-progress-bg"><div class="pet-progress-fill" id="thirstBar" style="width: 100%; background: #3498db;"></div></div>
+                    </div>
+
+                    <div class="pet-status-bar">
+                        <div class="pet-status-label"><span>Energi (Tidur)</span><span id="sleepVal">100%</span></div>
+                        <div class="pet-progress-bg"><div class="pet-progress-fill" id="sleepBar" style="width: 100%; background: #9b59b6;"></div></div>
+                    </div>
+
+                    <!-- Tombol Aksi Areal -->
+                    <div class="pet-actions">
+                        <button class="game-btn" onclick="feedPet()">🥩 Beri Makan</button>
+                        <button class="game-btn" onclick="drinkPet()">💧 Beri Minum</button>
+                        <button class="game-btn" onclick="sleepPet()">🌙 Tidurkan</button>
+                        <button class="game-btn" onclick="resetPet()" style="background: #e74c3c; color: white;">🔄 Ulang dari Telur</button>
+                    </div>
+                </div>
+
+                <!-- 2. GAMBAR (CANVAS) -->
+                <div class="dev-box">
+                    <h3>🎨 2. Papan Menggambar & Coret-coret</h3>
+                    <canvas id="drawCanvas" width="800" height="300"></canvas>
+                    <div class="draw-tools">
+                        <label>Warna:</label>
+                        <input type="color" id="brushColor" value="#00d4ff">
+                        <label>Ukuran:</label>
+                        <input type="range" id="brushSize" min="1" max="20" value="3">
+                        <button class="game-btn" onclick="clearCanvas()">Hapus Gambar 🗑️</button>
+                    </div>
+                </div>
+
+                <!-- 3. NULIS (CATATAN) -->
+                <div class="dev-box">
+                    <h3>📝 3. Buku Catatan Bebas</h3>
+                    <textarea class="note-area" id="studentNote" placeholder="Ketik catatan, ide, atau PR kamu di sini... (Otomatis tersimpan)"></textarea>
+                    <button class="game-btn" onclick="saveNote()" style="margin-top: 10px;">Simpan Catatan 💾</button>
+                    <span id="noteSavedText" style="color: #2ecc71; margin-left: 10px; font-weight: bold;"></span>
+                </div>
+
+                <!-- 4. MENGHITUNG (KALKULATOR BEBAS) -->
+                <div class="dev-box">
+                    <h3>🧮 4. Kalkulator Hitung Cepat</h3>
+                    <input type="text" class="calc-display" id="calcDisplay" readonly placeholder="0">
+                    <div class="calc-grid">
+                        <button class="calc-btn" onclick="clearCalc()">C</button>
+                        <button class="calc-btn" onclick="appendCalc('/')">/</button>
+                        <button class="calc-btn" onclick="appendCalc('*')">*</button>
+                        <button class="calc-btn" onclick="appendCalc('-')">-</button>
+                        <button class="calc-btn" onclick="appendCalc('7')">7</button>
+                        <button class="calc-btn" onclick="appendCalc('8')">8</button>
+                        <button class="calc-btn" onclick="appendCalc('9')">9</button>
+                        <button class="calc-btn" onclick="appendCalc('+')">+</button>
+                        <button class="calc-btn" onclick="appendCalc('4')">4</button>
+                        <button class="calc-btn" onclick="appendCalc('5')">5</button>
+                        <button class="calc-btn" onclick="appendCalc('6')">6</button>
+                        <button class="calc-btn" onclick="runCalc()" style="grid-row: span 2; height: 100%; background: #00d4ff; color: #020024;">=</button>
+                        <button class="calc-btn" onclick="appendCalc('1')">1</button>
+                        <button class="calc-btn" onclick="appendCalc('2')">2</button>
+                        <button class="calc-btn" onclick="appendCalc('3')">3</button>
+                        <button class="calc-btn" onclick="appendCalc('0')" style="grid-column: span 2;">0</button>
+                        <button class="calc-btn" onclick="appendCalc('.')">.</button>
+                    </div>
+                </div>
+
+                <!-- 5. MEMPROGRAM (LAB KODING HTML/CSS) -->
+                <div class="dev-box">
+                    <h3>💻 5. Lab Memprogram (Koding HTML Bebas)</h3>
+                    <p style="font-size: 0.85rem; margin-bottom: 8px;">Ketik kode HTML di bawah ini lalu klik 'Jalankan Kode':</p>
+                    <textarea class="code-input" id="codeInput" placeholder="Contoh: <h1 style='color:red;'>Halo Kelas 6A!</h1>"></textarea>
+                    <button class="game-btn" onclick="runCode()" style="margin-top: 10px;">Jalankan Kode 🚀</button>
+                    <h4 style="margin-top: 15px; color: #00d4ff;">Hasil Program Kamu:</h4>
+                    <iframe id="codePreview"></iframe>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MINI GAME KELAS 6A -->
+        <div id="mini-game" class="tab-content">
+            <div class="glass-card">
+                <h2>🎮 Arena Game Class 6A</h2>
+
+                <!-- Game 1: Kuis Matematika -->
+                <h3 class="game-section-title">🧮 Kuis Hitung Cepat Matematika</h3>
+                <div class="math-game-box">
+                    <p style="color: #a0a0a0; font-size: 0.9rem;">Uji ketangkasan hitung kamu di sini!</p>
+                    <div class="math-question" id="math-problem">5 x 5 = ?</div>
+                    <div style="margin-bottom: 15px;">
+                        <input type="number" id="math-answer" class="math-input" placeholder="Jawaban">
+                        <button class="game-btn" onclick="checkMathAnswer()">Jawab 🚀</button>
+                    </div>
+                    <p id="math-feedback" style="font-weight: bold; font-size: 1.1rem; color: #f1c40f;"></p>
+                    <p style="margin-top: 10px;">Skor Kamu: <span id="math-score" style="color: #00d4ff; font-weight: bold;">0</span></p>
+                </div>
+
+                <hr style="margin: 25px 0; border: 0; border-top: 1px solid rgba(255,255,255,0.3);">
+
+                <!-- Game 2: Flappy Spiderman -->
+                <h3 class="game-section-title">🕷️ Flappy Spiderman vs Bangunan Gedung</h3>
+                <div class="flappy-container">
+                    <p>Tekan **Spasi**, **Klik**, atau **Layar HP** untuk melompat melewati gedung!</p>
+                    <canvas id="flappyCanvas" width="320" height="400"></canvas>
+                    <button class="game-btn" onclick="resetFlappy()">Mulai / Restart Game 🔄</button>
+                </div>
+
+                <hr style="margin: 25px 0; border: 0; border-top: 1px solid rgba(255,255,255,0.3);">
+
+                <!-- Game 3: Petualangan Abdul -->
+                <h3 class="game-section-title">🗡️ Petualangan Abdul Mengalahkan Musuh</h3>
+                <div class="adventure-container">
+                    <p>Bantu **Abdul (🧑)** mengambil **Pedang (🗡️)** untuk mengalahkan **Musuh (👾)**!</p>
+                    <p id="adv-status" style="color: #f1c40f; font-weight: bold; margin: 10px 0;">Status: Abdul sedang bersiap!</p>
+                    
+                    <div class="grid-board" id="adv-board"></div>
+
+                    <div class="controls-grid">
+                        <div></div>
+                        <button class="ctrl-btn" onclick="moveAbdul(0, -1)">⬆️</button>
+                        <div></div>
+                        <button class="ctrl-btn" onclick="moveAbdul(-1, 0)">⬅️</button>
+                        <button class="ctrl-btn" onclick="moveAbdul(0, 1)">⬇️</button>
+                        <button class="ctrl-btn" onclick="moveAbdul(1, 0)">➡️</button>
+                    </div>
+                    <button class="game-btn" onclick="initAdventureGame()" style="margin-top: 15px;">Reset Petualangan 🔄</button>
+                </div>
+
+                <hr style="margin: 25px 0; border: 0; border-top: 1px solid rgba(255,255,255,0.3);">
+                
+                <!-- Game 4: Tic Tac Toe -->
+                <h3 class="game-section-title">❌⭕ Game Tic-Tac-Toe</h3>
+                <div class="game-status" id="ttt-status">Giliran Pemain: ❌</div>
+                <div class="ttt-board">
+                    <div class="ttt-cell" onclick="makeMove(this, 0)"></div>
+                    <div class="ttt-cell" onclick="makeMove(this, 1)"></div>
+                    <div class="ttt-cell" onclick="makeMove(this, 2)"></div>
+                    <div class="ttt-cell" onclick="makeMove(this, 3)"></div>
+                    <div class="ttt-cell" onclick="makeMove(this, 4)"></div>
+                    <div class="ttt-cell" onclick="makeMove(this, 5)"></div>
+                    <div class="ttt-cell" onclick="makeMove(this, 6)"></div>
+                    <div class="ttt-cell" onclick="makeMove(this, 7)"></div>
+                    <div class="ttt-cell" onclick="makeMove(this, 8)"></div>
+                </div>
+                <button class="game-btn" onclick="resetTTT()">Ulangi Game 🔄</button>
+
+                <hr style="margin: 25px 0; border: 0; border-top: 1px solid rgba(255,255,255,0.3);">
+
+                <!-- Game 5: Dadu Ludo -->
+                <h3 class="game-section-title">🎲 Pengocok Dadu Ludo</h3>
+                <div class="dice-box">
+                    <p>Klik tombol untuk mengocok dadu:</p>
+                    <div class="dice-display" id="dice-result">🎲</div>
+                    <button class="game-btn" onclick="rollDice()">Kocok Dadu! 🎲</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; Class 6A | <a href="https://www.tiktok.com/@classenama26?_r=1&_t=ZS-99CnAujt7WW" target="_blank">TikTok @classenama26</a></p>
+        <p class="footer-subtext">Website Dibuat Oleh Alkha — Jangan Lupa Follow TikTok <a href="https://www.tiktok.com/@alkha8149" target="_blank">@alkha8149</a> Ya! 😊</p>
+    </footer>
+
+    <script>
+        function openTab(tabId, btnElement) {
+            var contents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < contents.length; i++) { contents[i].classList.remove("active"); }
+            var buttons = document.getElementsByClassName("nav-btn");
+            for (var i = 0; i < buttons.length; i++) { buttons[i].classList.remove("active"); }
+            document.getElementById(tabId).classList.add("active");
+            btnElement.classList.add("active");
+        }
+
+        const dataHarian = {
+            1: { pilihan: "SBdP, PP, Agama", piket: "Raka, Denis, Abid, Theo, Ghani, Arjuna" },
+            2: { pilihan: "Penjas, B. Indonesia", piket: "Avril, Bilqis, Astagina, Khansa, Amira" },
+            3: { pilihan: "SBdP, IPAS, B. Indonesia", piket: "Maudy, Lora, Ajwa, Qetrine, Sahrini" },
+            4: { pilihan: "Matematika, B. Sunda, IPAS, B. Ing", piket: "Alby, Danis, Alkha, Edzra, Azka" },
+            5: { pilihan: "Matematika, IPAS", piket: "Adel, Khalila, Verald, Miftah, Marcel" },
+            6: { pilihan: "TKA/Pramuka, Ekskul Pilihan", piket: "Tidak ada piket" },
+            0: { pilihan: "Libur Sekolah", piket: "Tidak ada piket" }
+        };
+
+        function setHariIni() {
+            const sekarang = new Date();
+            const opsiTanggal = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('today-date').innerText = sekarang.toLocaleDateString('id-ID', opsiTanggal);
+            const indexHari = sekarang.getDay();
+            if (dataHarian[indexHari]) {
+                document.getElementById('today-lesson').innerText = dataHarian[indexHari].pilihan;
+                document.getElementById('today-piket').innerText = dataHarian[indexHari].piket;
+            }
+        }
+        setHariIni();
+
+        /* --- LOGIKA JAM --- */
+        function updateTimers() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('current-time').innerText = `${hours}:${minutes}:${seconds}`;
+
+            function formatTimeDiff(ms) {
+                const totalSecs = Math.floor(ms / 1000);
+                const h = String(Math.floor(totalSecs / 3600)).padStart(2, '0');
+                const m = String(Math.floor((totalSecs % 3600) / 60)).padStart(2, '0');
+                const s = String(totalSecs % 60).padStart(2, '0');
+                return `${h}j:${m}m:${s}d`;
+            }
+
+            const targetMasuk = new Date(now);
+            targetMasuk.setHours(6, 30, 0, 0);
+            if (now > targetMasuk) targetMasuk.setDate(targetMasuk.getDate() + 1);
+            document.getElementById('countdown-masuk').innerText = formatTimeDiff(targetMasuk - now);
+
+            const targetPulang = new Date(now);
+            targetPulang.setHours(12, 0, 0, 0);
+            if (now > targetPulang) {
+                targetPulang.setDate(targetPulang.getDate() + 1);
+                document.getElementById('status-pulang').innerText = "Sudah Pulang (Untuk Besok)";
+            } else if (now >= new Date(now).setHours(6, 30, 0, 0)) {
+                document.getElementById('status-pulang').innerText = "Sedang Belajar";
+            } else {
+                document.getElementById('status-pulang').innerText = "Menuju Waktu Pulang";
+            }
+            document.getElementById('countdown-pulang').innerText = formatTimeDiff(targetPulang - now);
+        }
+        setInterval(updateTimers, 1000);
+        updateTimers();
+
+        /* --- LOGIKA VIRTUAL PET (HEWAN PELIHARAAN) --- */
+        let petState = {
+            hunger: 100,
+            thirst: 100,
+            sleep: 100,
+            growth: 0
+        };
+
+        if (localStorage.getItem('class6a_petData')) {
+            petState = JSON.parse(localStorage.getItem('class6a_petData'));
+        }
+
+        function savePetState() {
+            localStorage.setItem('class6a_petData', JSON.stringify(petState));
+            updatePetUI();
+        }
+
+        function updatePetUI() {
+            // Update Bar
+            document.getElementById('hungerBar').style.width = petState.hunger + '%';
+            document.getElementById('hungerVal').innerText = Math.round(petState.hunger) + '%';
+            
+            document.getElementById('thirstBar').style.width = petState.thirst + '%';
+            document.getElementById('thirstVal').innerText = Math.round(petState.thirst) + '%';
+            
+            document.getElementById('sleepBar').style.width = petState.sleep + '%';
+            document.getElementById('sleepVal').innerText = Math.round(petState.sleep) + '%';
+
+            // Penentuan Fase Umur
+            let displayIcon = '🥚';
+            let stageName = 'Telur';
+
+            if (petState.growth >= 30) {
+                stageName = 'Dewasa 🐉';
+                displayIcon = '🐉';
+            } else if (petState.growth >= 15) {
+                stageName = 'Remaja 🐲';
+                displayIcon = '🐲';
+            } else if (petState.growth >= 5) {
+                stageName = 'Bayi 🐣';
+                displayIcon = '🐣';
+            } else {
+                stageName = 'Telur 🥚';
+                displayIcon = '🥚';
+            }
+
+            document.getElementById('petDisplay').innerText = displayIcon;
+            document.getElementById('petStageTitle').innerText = `Fase: ${stageName} (Masa Pertumbuhan: ${Math.floor(petState.growth)}/30)`;
+
+            // Status Pesan
+            let msg = "Peliharaanmu sangat bahagia & sehat! ✨";
+            if (petState.hunger < 30) msg = "⚠️ Peliharaanmu kelaparan! Beri makan segera!";
+            else if (petState.thirst < 30) msg = "⚠️ Peliharaanmu kehausan! Beri minum segera!";
+            else if (petState.sleep < 30) msg = "⚠️ Peliharaanmu sangat mengantuk! Istirahatkan dia!";
+
+            document.getElementById('petStatusMessage').innerText = msg;
+        }
+
+        function feedPet() {
+            if (petState.hunger < 100) {
+                petState.hunger = Math.min(100, petState.hunger + 25);
+                petState.growth += 1;
+                savePetState();
+            }
+        }
+
+        function drinkPet() {
+            if (petState.thirst < 100) {
+                petState.thirst = Math.min(100, petState.thirst + 25);
+                petState.growth += 1;
+                savePetState();
+            }
+        }
+
+        function sleepPet() {
+            if (petState.sleep < 100) {
+                petState.sleep = Math.min(100, petState.sleep + 35);
+                petState.growth += 1;
+                savePetState();
+            }
+        }
+
+        function resetPet() {
+            if (confirm("Yakin ingin mengulang perawatan hewan dari telur lagi?")) {
+                petState = { hunger: 100, thirst: 100, sleep: 100, growth: 0 };
+                savePetState();
+            }
+        }
+
+        // Pengurangan status seiring waktu (Pengurangan Otomatis)
+        setInterval(() => {
+            petState.hunger = Math.max(0, petState.hunger - 0.5);
+            petState.thirst = Math.max(0, petState.thirst - 0.7);
+            petState.sleep = Math.max(0, petState.sleep - 0.4);
+            savePetState();
+        }, 12000); // Berkurang setiap 12 detik
+
+        updatePetUI();
+
+        /* --- FITUR GAMBAR (CANVAS) --- */
+        const drawCanvas = document.getElementById('drawCanvas');
+        const drawCtx = drawCanvas.getContext('2d');
+        let painting = false;
+
+        function startPosition(e) { painting = true; draw(e); }
+        function finishedPosition() { painting = false; drawCtx.beginPath(); }
+        function draw(e) {
+            if (!painting) return;
+            const rect = drawCanvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+            drawCtx.lineWidth = document.getElementById('brushSize').value;
+            drawCtx.lineCap = 'round';
+            drawCtx.strokeStyle = document.getElementById('brushColor').value;
+
+            drawCtx.lineTo(x, y);
+            drawCtx.stroke();
+            drawCtx.beginPath();
+            drawCtx.moveTo(x, y);
+        }
+
+        drawCanvas.addEventListener('mousedown', startPosition);
+        drawCanvas.addEventListener('mouseup', finishedPosition);
+        drawCanvas.addEventListener('mousemove', draw);
+        drawCanvas.addEventListener('touchstart', startPosition);
+        drawCanvas.addEventListener('touchend', finishedPosition);
+        drawCanvas.addEventListener('touchmove', draw);
+
+        function clearCanvas() {
+            drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+        }
+
+        /* --- FITUR NULIS (CATATAN) --- */
+        const studentNote = document.getElementById('studentNote');
+        if (localStorage.getItem('savedNoteClass6A')) {
+            studentNote.value = localStorage.getItem('savedNoteClass6A');
+        }
+        function saveNote() {
+            localStorage.setItem('savedNoteClass6A', studentNote.value);
+            const text = document.getElementById('noteSavedText');
+            text.innerText = '✅ Tersimpan!';
+            setTimeout(() => { text.innerText = ''; }, 2000);
+        }
+
+        /* --- FITUR KALKULATOR BEBAS --- */
+        const calcDisplay = document.getElementById('calcDisplay');
+        function appendCalc(val) { calcDisplay.value += val; }
+        function clearCalc() { calcDisplay.value = ''; }
+        function runCalc() {
+            try {
+                calcDisplay.value = eval(calcDisplay.value);
+            } catch (e) {
+                calcDisplay.value = 'Error';
+            }
+        }
+
+        /* --- FITUR MEMPROGRAM (CODE EDITOR) --- */
+        function runCode() {
+            const code = document.getElementById('codeInput').value;
+            const preview = document.getElementById('codePreview').contentWindow.document;
+            preview.open();
+            preview.write(code);
+            preview.close();
+        }
+
+        /* --- GAME MATEMATIKA --- */
+        let currentMathNum1 = 0, currentMathNum2 = 0, currentOperator = '+', mathCorrectAnswer = 0, mathScore = 0;
+        function generateMathProblem() {
+            const operators = ['+', '-', 'x'];
+            currentOperator = operators[Math.floor(Math.random() * operators.length)];
+
+            if (currentOperator === '+') {
+                currentMathNum1 = Math.floor(Math.random() * 50) + 1;
+                currentMathNum2 = Math.floor(Math.random() * 50) + 1;
+                mathCorrectAnswer = currentMathNum1 + currentMathNum2;
+            } else if (currentOperator === '-') {
+                currentMathNum1 = Math.floor(Math.random() * 50) + 20;
+                currentMathNum2 = Math.floor(Math.random() * currentMathNum1);
+                mathCorrectAnswer = currentMathNum1 - currentMathNum2;
+            } else if (currentOperator === 'x') {
+                currentMathNum1 = Math.floor(Math.random() * 12) + 1;
+                currentMathNum2 = Math.floor(Math.random() * 12) + 1;
+                mathCorrectAnswer = currentMathNum1 * currentMathNum2;
+            }
+            document.getElementById('math-problem').innerText = `${currentMathNum1} ${currentOperator} ${currentMathNum2} = ?`;
+            document.getElementById('math-answer').value = '';
+        }
+
+        function checkMathAnswer() {
+            const userAns = parseInt(document.getElementById('math-answer').value);
+            const feedback = document.getElementById('math-feedback');
+            if (userAns === mathCorrectAnswer) {
+                mathScore += 10;
+                feedback.style.color = '#2ecc71';
+                feedback.innerText = '✅ Mantap! Jawaban Kamu Benar! (+10)';
+                document.getElementById('math-score').innerText = mathScore;
+                generateMathProblem();
+            } else {
+                feedback.style.color = '#e74c3c';
+                feedback.innerText = '❌ Yah, Masih Kurang Tepat. Coba Lagi!';
+            }
+        }
+        generateMathProblem();
+
+        /* --- GAME FLAPPY SPIDERMAN --- */
+        const canvas = document.getElementById("flappyCanvas");
+        const ctx = canvas.getContext("2d");
+        let spiderX = 50, spiderY = 150, gravity = 0.35, velocity = 0, jump = -6.5, score = 0;
+        let flappyGameOver = false, flappyStarted = false, buildings = [], buildingWidth = 45, buildingGap = 110, frameCount = 0;
+
+        function flappyJump() {
+            if (!flappyStarted) { flappyStarted = true; flappyLoop(); }
+            if (!flappyGameOver) velocity = jump;
+        }
+
+        canvas.addEventListener("click", flappyJump);
+        document.addEventListener("keydown", (e) => {
+            if (e.code === "Space" && document.getElementById("mini-game").classList.contains("active")) flappyJump();
+        });
+
+        function resetFlappy() {
+            spiderX = 50; spiderY = 150; velocity = 0; score = 0;
+            flappyGameOver = false; flappyStarted = true; buildings = []; frameCount = 0;
+            flappyLoop();
+        }
+
+        function drawBuilding(b) {
+            ctx.fillStyle = "#34495e"; ctx.fillRect(b.x, 0, buildingWidth, b.topHeight);
+            ctx.strokeStyle = "#e74c3c"; ctx.lineWidth = 2; ctx.strokeRect(b.x, 0, buildingWidth, b.topHeight);
+            ctx.fillStyle = "#f1c40f";
+            for (let y = 10; y < b.topHeight - 10; y += 20) { ctx.fillRect(b.x + 8, y, 10, 10); ctx.fillRect(b.x + 26, y, 10, 10); }
+
+            let bottomY = b.topHeight + buildingGap;
+            let bottomHeight = canvas.height - bottomY;
+            ctx.fillStyle = "#2c3e50"; ctx.fillRect(b.x, bottomY, buildingWidth, bottomHeight); ctx.strokeRect(b.x, bottomY, buildingWidth, bottomHeight);
+            for (let y = bottomY + 10; y < canvas.height - 10; y += 20) { ctx.fillRect(b.x + 8, y, 10, 10); ctx.fillRect(b.x + 26, y, 10, 10); }
+        }
+
+        function flappyLoop() {
+            if (flappyGameOver) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0f172a"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            velocity += gravity; spiderY += velocity;
+            ctx.font = "28px sans-serif"; ctx.textAlign = "center"; ctx.fillText("🕷️", spiderX, spiderY);
+
+            frameCount++;
+            if (frameCount % 90 === 0) {
+                let topH = Math.floor(Math.random() * (canvas.height - buildingGap - 100)) + 40;
+                buildings.push({ x: canvas.width, topHeight: topH, passed: false });
+            }
+
+            for (let i = 0; i < buildings.length; i++) {
+                let b = buildings[i]; b.x -= 2; drawBuilding(b);
+                if (spiderX + 10 > b.x && spiderX - 10 < b.x + buildingWidth && (spiderY - 15 < b.topHeight || spiderY + 10 > b.topHeight + buildingGap)) flappyGameOver = true;
+                if (b.x + buildingWidth < spiderX && !b.passed) { score++; b.passed = true; }
+            }
+
+            if (spiderY > canvas.height || spiderY < 0) flappyGameOver = true;
+            buildings = buildings.filter(b => b.x + buildingWidth > 0);
+
+            ctx.fillStyle = "#ffffff"; ctx.font = "bold 18px Segoe UI"; ctx.textAlign = "left"; ctx.fillText("Skor: " + score, 15, 30);
+
+            if (flappyGameOver) {
+                ctx.fillStyle = "rgba(0,0,0,0.75)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "#e74c3c"; ctx.font = "bold 22px Segoe UI"; ctx.textAlign = "center"; ctx.fillText("GAME OVER!", canvas.width / 2, canvas.height / 2 - 10);
+                ctx.fillStyle = "#ffffff"; ctx.font = "14px Segoe UI"; ctx.fillText("Skor Akhir: " + score, canvas.width / 2, canvas.height / 2 + 20);
+            } else {
+                requestAnimationFrame(flappyLoop);
+            }
+        }
+        ctx.fillStyle = "#0f172a"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#ffffff"; ctx.font = "16px Segoe UI"; ctx.textAlign = "center"; ctx.fillText("Klik/Tekan Spasi Untuk Mulai 🕷️", canvas.width / 2, canvas.height / 2);
+
+        /* --- GAME PETUALANGAN ABDUL --- */
+        let abdulPos = { x: 0, y: 0 }, swordPos = { x: 2, y: 2 }, enemyPos = { x: 4, y: 4 }, hasSword = false, advGameOver = false;
+        function initAdventureGame() {
+            abdulPos = { x: 0, y: 0 }; swordPos = { x: 2, y: 2 }; enemyPos = { x: 4, y: 4 };
+            hasSword = false; advGameOver = false;
+            document.getElementById('adv-status').innerText = "Status: Ambil pedang 🗡️ dulu!";
+            renderAdvBoard();
+        }
+
+        function renderAdvBoard() {
+            const boardEl = document.getElementById('adv-board'); boardEl.innerHTML = '';
+            for (let y = 0; y < 5; y++) {
+                for (let x = 0; x < 5; x++) {
+                    const cell = document.createElement('div'); cell.className = 'grid-cell';
+                    if (x === abdulPos.x && y === abdulPos.y) cell.innerText = hasSword ? '🧑‍⚔️' : '🧑';
+                    else if (x === swordPos.x && y === swordPos.y && !hasSword) cell.innerText = '🗡️';
+                    else if (x === enemyPos.x && y === enemyPos.y) cell.innerText = '👾';
+                    boardEl.appendChild(cell);
+                }
+            }
+        }
+
+        function moveAbdul(dx, dy) {
+            if (advGameOver) return;
+            let newX = abdulPos.x + dx, newY = abdulPos.y + dy;
+            if (newX >= 0 && newX < 5 && newY >= 0 && newY < 5) {
+                abdulPos.x = newX; abdulPos.y = newY;
+                if (abdulPos.x === swordPos.x && abdulPos.y === swordPos.y && !hasSword) {
+                    hasSword = true; document.getElementById('adv-status').innerText = "Abdul mendapat Pedang 🗡️!";
+                }
+                if (abdulPos.x === enemyPos.x && abdulPos.y === enemyPos.y) {
+                    if (hasSword) { document.getElementById('adv-status').innerText = "🎉 HORE! Abdul menang!"; advGameOver = true; }
+                    else { document.getElementById('adv-status').innerText = "☠️ Abdul kalah!"; advGameOver = true; }
+                }
+                renderAdvBoard();
+            }
+        }
+        initAdventureGame();
+
+        /* --- GAME TIC TAC TOE --- */
+        let currentPlayer = '❌', board = ['', '', '', '', '', '', '', '', ''], gameActive = true;
+        const winConditions = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+        function makeMove(cell, index) {
+            if (board[index] !== '' || !gameActive) return;
+            board[index] = currentPlayer; cell.innerText = currentPlayer;
+            if (winConditions.some(c => c.every(i => board[i] === currentPlayer))) {
+                document.getElementById('ttt-status').innerText = `Pemenangnya: ${currentPlayer} 🎉`; gameActive = false; return;
+            }
+            if (!board.includes('')) { document.getElementById('ttt-status').innerText = 'Hasil Seri! 🤝'; gameActive = false; return; }
+            currentPlayer = currentPlayer === '❌' ? '⭕' : '❌';
+            document.getElementById('ttt-status').innerText = `Giliran Pemain: ${currentPlayer}`;
+        }
+        function resetTTT() {
+            board = ['', '', '', '', '', '', '', '', '']; gameActive = true; currentPlayer = '❌';
+            document.getElementById('ttt-status').innerText = `Giliran Pemain: ${currentPlayer}`;
+            document.querySelectorAll('.ttt-cell').forEach(cell => cell.innerText = '');
+        }
+
+        /* --- GAME DADU LUDO --- */
+        const diceIcons = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+        function rollDice() {
+            const diceDisplay = document.getElementById('dice-result');
+            let rolls = 0;
+            const interval = setInterval(() => {
+                diceDisplay.innerText = diceIcons[Math.floor(Math.random() * 6)];
+                rolls++;
+                if (rolls > 10) clearInterval(interval);
+            }, 50);
+        }
+    </script>
+</body>
+</html>
